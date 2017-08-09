@@ -308,3 +308,7 @@ def unload():
     global grammar
     if grammar: grammar.unload()
     grammar = None
+    
+    global topGrammar
+    if topGrammar: topGrammar.unload()
+    topGrammar = None
