@@ -18,7 +18,8 @@ class BringMeRules(MappingRule):
         Choice("app",{
             "code": "C:\Program Files (x86)\Microsoft VS Code\Code.exe",
             "chrome": "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
-            "macro|macros": "C:\NatLink\NatLink\MacroSystem"
+            "macro|macros": "C:\NatLink\NatLink\MacroSystem",
+            
         }),
         Dictation("text")
         
@@ -27,4 +28,9 @@ class BringMeRules(MappingRule):
         "text": ""
     }
 
+
+grammar = Grammar("bring me")
+grammar.add_rule(BringMeRules())
+grammar.load()
+print("loaded bring me!")
    

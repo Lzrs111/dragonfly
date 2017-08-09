@@ -165,7 +165,6 @@ else:
     FormatRule = None
 
 
-test = BringApp(r"C:\Program Files (x86)\Microsoft VS Code\Code.exe").execute()
 
 #---------------------------------------------------------------------------
 # Here we define the keystroke rule.
@@ -212,7 +211,6 @@ class KeystrokeRule(MappingRule):
 def getSingle(language):
     alternatives = []
     alternatives.append(RuleRef(rule=KeystrokeRule()))
-    alternatives.append(RuleRef(rule=BringMeRules()))
     if language == "javascript":
         print("loading webdev")
         alternatives.append(RuleRef(rule=JavaScriptMain()))
@@ -278,7 +276,8 @@ def returnRepeat(language):
 # Create and load this module's grammar.
 
 rule = returnRepeat("javascript")
-grammar = Grammar("multi edit")   # Create this module's grammar.
+context = AppContext(executable="code") #this grammar is only valid in VS Code
+grammar = Grammar("multi edit",context=context)   # Create this module's grammar.
 grammar.add_rule(rule)    # Add the top-level rule.
 grammar.load()                    # Load the grammar.
 
