@@ -11,7 +11,7 @@ def bringer(app):
 
 class BringMeRules(MappingRule):
     mapping = {
-        "bring me <app>": Function(bringer),
+        "open <app>": Function(bringer),
     }
 
     extras = [
@@ -19,6 +19,7 @@ class BringMeRules(MappingRule):
             "code": "C:\Program Files (x86)\Microsoft VS Code\Code.exe",
             "chrome": "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
             "macro|macros": "C:\NatLink\NatLink\MacroSystem",
+            "notepad": "C:\Windows\\notepad.exe"
             
         }),
         Dictation("text")
@@ -34,3 +35,7 @@ grammar.add_rule(BringMeRules())
 grammar.load()
 print("loaded bring me!")
    
+def unload():
+    global grammar
+    if grammar: grammar.unload()
+    grammar = None
