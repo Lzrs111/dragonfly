@@ -22,7 +22,6 @@ class CSSMain(MappingRule):
         "inline block": Text("inline-block"),
         "block": Text("block"),
         "flex": Text("flex"),
-        "box": Text("box"),
         "<n> percent": Text("%(n)d") + Text("%"),
         "margin [<direction>]": Text("margin")+ Text("%(direction)s"),
         "padding [<direction>]": Text("padding")+ Text("%(direction)s"),
@@ -44,10 +43,15 @@ class CSSMain(MappingRule):
             "width|with": "width",
             "height": "height",
             "border": "border",
+            "border radius": "border-radius",
             "background": "background",
             "display": "display",
             "background color": "background-color",
-            "position": "position"
+            "position": "position",
+            "font family": "font-family",
+            "font size": "font-size",
+            "font color": "font-color",
+            "text align": "text-align"
         })
     ]
     defaults = {

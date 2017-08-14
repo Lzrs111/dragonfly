@@ -6,6 +6,7 @@
 from bringme import BringMeRules
 from css import CSSMain
 from javascript import JavaScriptMain
+from temporary import TemporaryCommands
 """
 Command-module for cursor movement and **editing**
 ============================================================================
@@ -193,6 +194,7 @@ class KeystrokeRule(MappingRule):
                ]
     defaults = {
                 "n": 1,
+                "text": ""
                }
     # Note: when processing a recognition, the *value* of 
     #  this rule will be an action object from the right side 
@@ -208,19 +210,14 @@ class KeystrokeRule(MappingRule):
 # First we create an element that references the keystroke rule.
 #  Note: when processing a recognition, the *value* of this element
 #  will be the value of the referenced rule: an action.
-def getSingle(language):
-    alternatives = []
-    alternatives.append(RuleRef(rule=KeystrokeRule()))
-    if language == "javascript":
-        print("loading webdev")
-        alternatives.append(RuleRef(rule=JavaScriptMain()))
-        alternatives.append(RuleRef(rule=CSSMain()))
-    elif language == "python":
-        print("loading python")
-    if FormatRule:
-        alternatives.append(RuleRef(rule=FormatRule()))
-    single_action = Alternative(alternatives)
-    return single_action
+alternatives = []
+alternatives.append(RuleRef(rule=KeystrokeRule()))
+alternatives.append(RuleRef(rule=JavaScriptMain()))
+alternatives.append(RuleRef(rule=CSSMain()))
+alternatives.append(RuleRef(rule=TemporaryCommands()))
+if FormatRule:
+    alternatives.append(RuleRef(rule=FormatRule()))
+single_action = Alternative(alternatives)
 
 # Second we create a repetition of keystroke elements.
 #  This element will match anywhere between 1 and 16 repetitions
@@ -231,9 +228,7 @@ def getSingle(language):
 #  will be a sequence of the contained elements: a sequence of
 #  actions.
 
-def getSequence(language):
-    sequence = Repetition(getSingle(language), min=1, max=16, name="sequence")
-    return sequence
+sequence = Repetition(single_action, min=1, max=16, name="sequence")
 #---------------------------------------------------------------------------
 # Here we define the top-level rule which the user can say.
 
@@ -242,43 +237,40 @@ def getSequence(language):
 #  method will be called.  It receives information about the 
 #  recognition in the "extras" argument: the sequence of 
 #  actions and the number of times to repeat them.
-def returnRepeat(language):
-    class RepeatRule(CompoundRule):
+class RepeatRule(CompoundRule):
 
-        # Here we define this rule's spoken-form and special elements.
-        spec     = "<sequence> [[[and] repeat [that]] <n> times]"
-        extras   = [
-                    getSequence(language),                 # Sequence of actions defined above.
-                    IntegerRef("n", 1, 100),  # Times to repeat the sequence.
-                   ]
-        defaults = {
-                    "n": 1,                   # Default repeat count.
-                   }
+    # Here we define this rule's spoken-form and special elements.
+    spec     = "<sequence> [[[and] repeat [that]] <n> times]"
+    extras   = [
+                sequence,                 # Sequence of actions defined above.
+                IntegerRef("n", 1, 100),  # Times to repeat the sequence.
+                ]
+    defaults = {
+                "n": 1,                   # Default repeat count.
+                }
 
-        # This method gets called when this rule is recognized.
-        # Arguments:
-        #  - node -- root node of the recognition parse tree.
-        #  - extras -- dict of the "extras" special elements:
-        #     . extras["sequence"] gives the sequence of actions.
-        #     . extras["n"] gives the repeat count.
-        def _process_recognition(self, node, extras):
-            sequence = extras["sequence"]   # A sequence of actions.
-            count = extras["n"]      # An integer repeat count.
-            for i in range(count):
-                for action in sequence:
-                    action.execute()
-            release.execute()
-    govno = RepeatRule()
-    return govno
+    # This method gets called when this rule is recognized.
+    # Arguments:
+    #  - node -- root node of the recognition parse tree.
+    #  - extras -- dict of the "extras" special elements:
+    #     . extras["sequence"] gives the sequence of actions.
+    #     . extras["n"] gives the repeat count.
+    def _process_recognition(self, node, extras):
+        sequence = extras["sequence"]   # A sequence of actions.
+        count = extras["n"]      # An integer repeat count.
+        for i in range(count):
+            for action in sequence:
+                action.execute()
+        release.execute()
+   
 
 
 #---------------------------------------------------------------------------
 # Create and load this module's grammar.
 
-rule = returnRepeat("javascript")
 context = AppContext(executable="code") #this grammar is only valid in VS Code
 grammar = Grammar("multi edit",context=context)   # Create this module's grammar.
-grammar.add_rule(rule)    # Add the top-level rule.
+grammar.add_rule(RepeatRule())    # Add the top-level rule.
 grammar.load()                    # Load the grammar.
 
 

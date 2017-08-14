@@ -1,10 +1,11 @@
 from dragonfly import * 
+from SeriesMappingRule import SeriesMappingRule
 
 context = AppContext(executable="chrome")
 grammar = Grammar("chrome", context=context)
 noSpaceNoCaps = Mimic("\\no-caps-on") + Mimic("\\no-space-on")
 
-rules = MappingRule(
+rules = SeriesMappingRule(
     name = "chrome",
     mapping = {
       "edit": Key("w-a"),
@@ -26,6 +27,8 @@ rules = MappingRule(
       "address bar": Key("c-l"),
       "open <website>": Key("escape") + Pause("20") + Key("t") + Pause("20") + Text("%(website)s") + Key("enter"),
       "show links": Key("s-f"),
+      "copy": Key("c-v"),
+      "paste": Key("c-p"),
 
       },
     extras = [
@@ -45,7 +48,8 @@ rules = MappingRule(
             "you tube": "https://www.youtube.com",
             "gee mail|gmail": "https://mail.google.com",
             "tweeter|twitter": "https://www.twitter.com",
-            "plebbit|reddit": "https://www.reddit.com"
+            "plebbit|reddit": "https://www.reddit.com",
+            "localhost":      "localhost:3000",
         })
 
       ],

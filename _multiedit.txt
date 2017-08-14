@@ -17,6 +17,7 @@ from dragonfly import *
 #  times or when that key is not held down at all.
 
 release = Key("shift:up, ctrl:up,alt:up")
+pause = Pause("20")
 
 
 #---------------------------------------------------------------------------
@@ -93,13 +94,20 @@ cmd.map = {
             '[is] leak':  Text('<='),
             '[is] greek':  Text('>='),
             'percussion': Key('percent'),
+            'end line comma': Key("end") + Key("comma"),
+            'banana': Key('end') + Pause("20") + Key('enter'),
+            'copy line': Key('home') + Key('s-end') + Key('c-insert') + Key("escape"),
+            'paste': Key("s-insert"),
+            "delete line": Key("home") + Key("s-end") + Key("delete"),
+            "editor left": Key("escape:2") + Key("c-pageup"),
+            "editor right": Key("escape:2") + Key("c-pagedown"),
 
-            "[<text>] plus equals":                  Text('$(text)s +='),
-            "[<text>] is equal":                     Text ("$(text)s =="),
-            "[<text>] is identical":                 Text ("$(text)s ==="),
-            "[<text>] is not equal":                 Text ("$(text)s !="),
-            "[<text>] [is] (bigger|larger)":         Text("$(text)s >"),
-            "[<text>] [is] smaller":                 Text("$(text)s <"),
+            "[<text>] plus equals [<text>][<n>]":                  Text('%(text)s +='),
+            "[<text>] is equal [to] [<text>][<n>]":                     Text ("%(text)s =="),
+            "[<text>] is identical [to] [<text>][<n>]":                 Text ("%(text)s ==="),
+            "[<text>] is not equal [to] [<text>][<n>]":                 Text ("%(text)s !="),
+            "[<text>] [is] (bigger|larger) [than] [<text>][<n>]":         Text("%(text)s >"),
+            "[<text>] [is] (smaller|less) [than] [<text>][<n>]":                 Text("%(text)s <"),
 
 
 
@@ -108,10 +116,10 @@ cmd.map = {
             "slatab":                       Key('enter') + Key('tab'),
 
 
-            '[<n>] arrow left': Key('left:%(n)d'),
-            '[<n>] arrow right': Key('right:%(n)d'),
-            '[<n>] arrow up': Key('up:%(n)d'),
-            '[<n>] arrow down': Key('down:%(n)d'),
+            '[<n>] move left': pause + Key('left:%(n)d') + pause,
+            '[<n>] move right': pause + Key('right:%(n)d') + pause,
+            '[<n>] move up': pause + Key('up:%(n)d') + pause,
+            '[<n>] move down': pause +  Key('down:%(n)d') + pause,
 
 
 	    #NATO alphabet

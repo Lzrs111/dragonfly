@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Nuance\NaturallySpeaking12\Program\natspeak.exe" /user "Bez naglaska"
