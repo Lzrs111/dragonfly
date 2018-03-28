@@ -34,7 +34,8 @@ rules = SeriesMappingRule(
       'previous tab': Key('shift:down,c-tab,shift:up'),
       'next tab': Key('c-tab'),
       'go back':Key('H'),
-      'clear input': Key('shift:down,home,shift:up') + Key("backspace")
+      'clear input': Key('shift:down,home,shift:up') + Key("backspace"),
+      'my e-mail':Text("mario.dragovic@gmail.com"),
       },
     extras = [
         Dictation("text"),
@@ -63,6 +64,7 @@ rules = SeriesMappingRule(
             ' South Park':'http://southpark.cc.com/',
             'Japanese':'www.onejav.com',
             'Facebook':'www.Facebook.com',
+            'github':'www.github.com',
           })
 
       ],
