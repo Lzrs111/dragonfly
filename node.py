@@ -20,6 +20,7 @@ class NodeRules(MappingRule):
         'html':Text("html"),
         'http':Text("http"),
         'require <module>':Text("var %(module)s  = require('%(module)s')"),
+        'module exports':Text("module.exports = {}")+Pause("20")+Key("left"),
     }
     extras = [
         Dictation("text"),

@@ -34,7 +34,12 @@ cmd.map = {
            "page down [<n>]":                  Key("pgdown:%(n)d"),
            "up <n> (page | pages)":            Key("pgup:%(n)d"),
            "down <n> (page | pages)":          Key("pgdown:%(n)d"),
-           "toggle terminal":                  Key("shift:down") + Key("alt:down") + Key("c-t") + release,
+           'toggle terminal':Key("shift:down")+Key('c-k')+release,
+           "new terminal":                  Key("shift:down") + Key("alt:down") + Key("c-t") + release,
+           'clear terminal':Key("c-k"),
+           'focus terminal': Key("shift:down")+Key("c-t")+release,
+           'kill terminal':  Key("shift:down") + Key("alt:down") + Key("c-f") + release,
+           'focus editor':Key("shift:down")+Key("c-f")+release,
            "make comment":                     Key("c-apostrophe"),
 
            "space [<n>]":                      release + Key("space:%(n)d"),

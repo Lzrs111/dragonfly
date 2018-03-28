@@ -43,7 +43,7 @@ class JavaScriptMain(MappingRule):
         "make else if": pause + Text("makeelsif") + pause + Key("tab"),
         "make else": pause + Text("makeelse!") + pause + Key("tab"),
         "while|wild": Key("c-c"),
-        "[make[a new]]arrow function": Text("arf") +Key("tab"),
+        "[make[a new]]arrow function": Text("arf")+Pause("20") +Key("tab"),
         "call method": Key("c-b"),
         "console log":Text("clog") +pause+Key("tab"),
         "make [a new] generator": Key("c-n"),

@@ -65,6 +65,7 @@ rules = SeriesMappingRule(
             'Japanese':'www.onejav.com',
             'Facebook':'www.Facebook.com',
             'github':'www.github.com',
+            'express':'https://expressjs.com/',
           })
 
       ],
