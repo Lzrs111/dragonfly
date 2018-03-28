@@ -8,16 +8,17 @@ noSpaceNoCaps = Mimic("\\no-caps-on") + Mimic("\\no-space-on")
 rules = SeriesMappingRule(
     name = "chrome",
     mapping = {
+      'go to start': Key('home'),
       "edit": Key("w-a"),
-      "reload" : Key("f5"),
+      "reload|refresh" : Key("f5"),
       "open": Key("escape, o"),
       "jump": Key("f"),
-      "new tab": Key("t"),
+      "new tab":  Key('escape')+Key("t"),
       "console": Key("cs-j"),
-      "close tab": Key("c-w"),
+      "close this": Key('escape')+Key("c-w"),
       "escape": Key('escape'),
       "new window": Key("c-n"),
-      "tab <choice>": Key("c-%(choice)s"), 
+      "switch to <choice>": Key("c-%(choice)s"), 
       "quit chrome": Key("shift:down,c-w,shift:up"),
       "open history": Key("c-h"),
       "open downloads": Key("c-j"),
@@ -25,11 +26,15 @@ rules = SeriesMappingRule(
       "focus reshift": Key("s-f6"),
       "find": Key("c-f") + Pause("20"),
       "address bar": Key("c-l"),
-      "open <website>": Key("escape") + Pause("20") + Key("t") + Pause("20") + Text("%(website)s") + Key("enter"),
-      "show links": Key("s-f"),
+      "open <website>": Key('f6')+ Pause('20')+Text("%(website)s") + Key("enter"),
+      "show links":   Key('escape') + Key("f"),
       "copy": Key("c-v"),
       "paste": Key("c-p"),
-
+      'copy link':Key("c-l") +  Key('c-c'),
+      'previous tab': Key('shift:down,c-tab,shift:up'),
+      'next tab': Key('c-tab'),
+      'go back':Key('H'),
+      'clear input': Key('shift:down,home,shift:up') + Key("backspace")
       },
     extras = [
         Dictation("text"),
@@ -40,17 +45,25 @@ rules = SeriesMappingRule(
             "three|tree": "3",
             "four": "4",
             "five": "5",
-            "six": "6",
+           "six": "6",
             "seven":"7",
             "eight":"8",
         }),
         Choice("website",{
             "you tube": "https://www.youtube.com",
             "gee mail|gmail": "https://mail.google.com",
-            "tweeter|twitter": "https://www.twitter.com",
-            "plebbit|reddit": "https://www.reddit.com",
-            "localhost":      "localhost:3000",
-        })
+            "tweeter|twitter|tabtip|tpt": "https://www.twitter.com",
+            'notifications':'https://twitter.com/i/notifications',
+            "reddit": "https://www.reddit.com",
+            'JavaScript':'https://developer.mozilla.org/bm/docs/Web/JavaScript/Reference',
+            'Google':' http://www.google.com',
+            'Pirate Bay':'https://thepiratebay.org/',
+            'twitch':' HTTP://www.twitch.tv',
+            'dragonfly key reference':'https://pythonhosted.org/dragonfly/actions.html',
+            ' South Park':'http://southpark.cc.com/',
+            'Japanese':'www.onejav.com',
+            'Facebook':'www.Facebook.com',
+          })
 
       ],
     defaults = {
@@ -66,3 +79,8 @@ def unload():
   global grammar
   if grammar: grammar.unload()
   grammar = None
+
+
+
+
+

@@ -18,9 +18,11 @@ from dragonfly import *
 
 release = Key("shift:up, ctrl:up,alt:up")
 pause = Pause("20")
+norm = Key("escape") + pause
 
 
-#---------------------------------------------------------------------------
+
+ #
 # Here we define the single-action commands.  These can be spoken
 #  in series so as to execute multiple actions within a single utterance.
 
@@ -42,6 +44,10 @@ cmd.map = {
            "delete [<n> | this] (line|lines)": release + Key("home, s-down:%(n)d, del"),
            "backspace [<n>]":                  release + Key("backspace:%(n)d"),
            "pop up":                           release + Key("apps"),
+           "comma": release + Key("comma"),
+           "dot":                              Text("."),
+           "backspace": Key("backspace"),
+           'slash': Key("slash"),
 
        
            "select all":                       release + Key("c-a"),
@@ -53,73 +59,63 @@ cmd.map = {
 
            "say <text>":                       release + Text("%(text)s"),
            "mimic <text>":                     release + Mimic(extra="text"),
+           'plus': Key("plus"),
 
-	        'beginning': Key('g:2'),
-            'end':      Key('G'),
-            '[<n>] warp':     Key('w:%(n)d'),
-            '[<n>] gorp':     Key('e:%(n)d'),
-            '[<n>] dork':  Key('b:%(n)d'),
-            'sub':      Key('0'),
-            'cash':     Key('dollar'),
-            'tomato':   Key('d:2'),
+	        'beginning': norm + Key('g:2'),
+            'end':     norm + Key('G'),
+            '[<n>] warp': norm + Key('w:%(n)d'),
+            '[<n>] gorp':  norm + Key('e:%(n)d'),
+            '[<n>] dork':  norm + Key('b:%(n)d'),
+            'sub':  norm + Key('0'),
+            'cash': norm + Key('dollar'),
+            'tomato':  norm + Key('d:2'),
             'search [<text>]': Key('s-slash') + Text("%(text)s"),
-            'line below': Key('o'),
-            'line above': Key('O'),
-            'insert': Key('i'),
-            'normal': Key('escape'),
-            'cancel':  Key('u'),
-            'append': Key('a'),
-            'append line': Key('A'),
-            'left':  Key('h'),    
-            'right': Key('l'),
-            'down': Key('j'),
-            'up': Key('k'),
-            "[<n>] up": Key("k:%(n)d"),
-            "[<n>] down": Key("j:%(n)d"),
-            "[<n>] left": Key("h:%(n)d"),
-            "[<n>] right": Key("l:%(n)d"),
-            "[<n>] go up": Key("c-b:%(n)d"),
-            "[<n>] go down": Key("c-f:%(n)d"),
+            'line below': norm + Key('o'),
+            'line above': norm + Key('O'),
+            'insert': norm + Key('i'),
+            'normal': norm + Key('escape'),
+            'cancel':  norm + Key('u'),
+            'append': norm + Key('a'),
+            'end of line': norm + Key('A'),
+            'left': norm +  Key('h'),    
+            'right': norm + Key('l'),
+            'down': norm + Key('j'),
+            'up': norm + Key('k'),
+            "[<n>] up": norm +Key("k:%(n)d"),
+            "[<n>] down": norm +Key("j:%(n)d"),
+            "[<n>] left": norm +Key("h:%(n)d"),
+            "[<n>] right": norm +Key("l:%(n)d"),
+            "[<n>] go up": norm +Key("c-b:%(n)d"),
+            "[<n>] go down": norm +Key("c-f:%(n)d"),
             'remove': Key('x'),
             'pasta': Key('p'),
             'coffee': Key('y'),
             'visual':  Key('v'),
+            'copy line':Key("v,y"),
             'delete next': Key('d,w'),
             'delete this': Key('d,e'),	
-            'sharp': Key('langle') + Key('rangle') + Key('left'),
-            'visual line': Key('s-v'),
+            "delete until the end": Key("d,dollar"),
+            'delete until the beginning':Key("d,0"),
+           'visual line': Key('s-v'),
             'visual block': Key('c-v'),
-            'slapper': Key('down')  + Key('tab'),
             'replace this':  Key('c,e'),
             '[is] leak':  Text('<='),
             '[is] greek':  Text('>='),
             'percussion': Key('percent'),
-            'end line comma': Key("end") + Key("comma"),
-            'banana': Key('end') + Pause("20") + Key('enter'),
-            'copy line': Key('home') + Key('s-end') + Key('c-insert') + Key("escape"),
-            'paste': Key("s-insert"),
-            "delete line": Key("home") + Key("s-end") + Key("delete"),
-            "editor left": Key("escape:2") + Key("c-pageup"),
+           "editor left": Key("escape:2") + Key("c-pageup"),
             "editor right": Key("escape:2") + Key("c-pagedown"),
-
-            "[<text>] plus equals [<text>][<n>]":                  Text('%(text)s +='),
-            "[<text>] is equal [to] [<text>][<n>]":                     Text ("%(text)s =="),
-            "[<text>] is identical [to] [<text>][<n>]":                 Text ("%(text)s ==="),
-            "[<text>] is not equal [to] [<text>][<n>]":                 Text ("%(text)s !="),
-            "[<text>] [is] (bigger|larger) [than] [<text>][<n>]":         Text("%(text)s >"),
-            "[<text>] [is] (smaller|less) [than] [<text>][<n>]":                 Text("%(text)s <"),
-
+            "colon|colin|collin": Text(":"),
+            "falls|false": Text("false"),
+            "true|troo|tru": Text("true"),
+            "save": Key("c-s"),
+            "close editor":  Key("c-f4"),            
+            "make new file":  Key("c-n"),
 
 
-            "slap [<n>]":                   Key('enter:%(n)d'),
-            "tab":                          Key('tab'),
-            "slatab":                       Key('enter') + Key('tab'),
-
-
+            '[<n>] move down': pause +  Key('down:%(n)d') + pause,
             '[<n>] move left': pause + Key('left:%(n)d') + pause,
             '[<n>] move right': pause + Key('right:%(n)d') + pause,
             '[<n>] move up': pause + Key('up:%(n)d') + pause,
-            '[<n>] move down': pause +  Key('down:%(n)d') + pause,
 
 
 	    #NATO alphabet
@@ -182,7 +178,7 @@ cmd.map = {
             "Queen"    : Key("q"),
             "Romeo"    : Key("r"),
             "Rico"     : Key("r"),
-            "soy"      : Key("s"),
+            "Sierra"      : Key("s"),
             "tango"    : Key("t"),
             "toy"      : Key("t"),
             "uniform"  : Key("u"),

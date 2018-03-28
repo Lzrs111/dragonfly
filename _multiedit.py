@@ -7,6 +7,9 @@ from bringme import BringMeRules
 from css import CSSMain
 from javascript import JavaScriptMain
 from temporary import TemporaryCommands
+from node import NodeRules
+from meta import DragonflyRules
+
 """
 Command-module for cursor movement and **editing**
 ============================================================================
@@ -215,6 +218,8 @@ alternatives.append(RuleRef(rule=KeystrokeRule()))
 alternatives.append(RuleRef(rule=JavaScriptMain()))
 alternatives.append(RuleRef(rule=CSSMain()))
 alternatives.append(RuleRef(rule=TemporaryCommands()))
+alternatives.append(RuleRef(rule=NodeRules()))
+alternatives.append(RuleRef(rule=DragonflyRules()))
 if FormatRule:
     alternatives.append(RuleRef(rule=FormatRule()))
 single_action = Alternative(alternatives)

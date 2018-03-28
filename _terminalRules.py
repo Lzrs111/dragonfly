@@ -6,24 +6,37 @@ terminalRule = SeriesMappingRule(
     mapping = {
         "git <choice>": Text("git %(choice)s"),
         "node start": Text("npm start") + Key("enter"),
+        'global':Text(" -g"),
+        'save dev':Text(" -save-dev"),
         "make directory": Text("mkdir "),
         "change directory": Text("cd "),
-        "new file": "new-item ",
         "open file": "invoke-item",
-        "chrome": "chrome",
-        "code": "code",
+        "chrome": Text("chrome"),
         "change to desktop": Text("ctd") + Key("enter"),
-        "dragon": Text("dragon") + Key("enter")
+        "dragon": Text("dragon") + Key("enter"),
+        'node <command>':Text("npm %(command)s"),
+        'stop this':Key("c-c"),
+        'clear':Text("cls"),
+        'heroku':Text("heroku "),
+        'list directories':Text("ls")+Key("enter"),
+        'enter':Key("enter"),
+        'master':Text("master "),
     },
     extras = [
         Dictation("text"),
         Choice("choice",{
             "init": "init",
-            "push": "push",
-            "pull": "pull",
-            "commit": "commit -m",
+            "push": "push ",
+            "pull": "pull ",
+            "commit": "commit -m ",
+            'add':'add .',
 
-        })
+        }),
+        #  commands for node
+         Choice('command',{
+             'in it|init':'init',
+             'install':'install',
+         })
     ],
     defaults = {
         "text" : ""
