@@ -21,6 +21,8 @@ class NodeRules(MappingRule):
         'http':Text("http"),
         'require <module>':Text("var %(module)s  = require('%(module)s')"),
         'module exports':Text("module.exports = {}")+Pause("20")+Key("left"),
+        'write file':Text("writeFile"),
+        '.txt':Text(".txt"),
     }
     extras = [
         Dictation("text"),
@@ -29,6 +31,7 @@ class NodeRules(MappingRule):
             "file system":"fs",
             'url':"url",
             'http':'http',
+            'mongoose':'mongoose',
         })
     ]
     defaults = {

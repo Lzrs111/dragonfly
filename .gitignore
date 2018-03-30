@@ -4,4 +4,4 @@ backup/
 core/
 gdev/
 *.pyc
-jstest.js
+*.js

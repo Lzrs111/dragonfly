@@ -9,6 +9,7 @@ from javascript import JavaScriptMain
 from temporary import TemporaryCommands
 from node import NodeRules
 from meta import DragonflyRules
+from react import ReactRule
 
 """
 Command-module for cursor movement and **editing**
@@ -220,6 +221,7 @@ alternatives.append(RuleRef(rule=CSSMain()))
 alternatives.append(RuleRef(rule=TemporaryCommands()))
 alternatives.append(RuleRef(rule=NodeRules()))
 alternatives.append(RuleRef(rule=DragonflyRules()))
+alternatives.append(RuleRef(rule=ReactRule()))
 if FormatRule:
     alternatives.append(RuleRef(rule=FormatRule()))
 single_action = Alternative(alternatives)

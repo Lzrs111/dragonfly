@@ -18,7 +18,6 @@ class BringMeRules(MappingRule):
         Choice("app",{
             "code": "C:\Program Files (x86)\Microsoft VS Code\Code.exe",
             "chrome": "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
-            "macro|macros": "C:\NatLink\NatLink\MacroSystem",
             "notepad": "C:\Windows\\notepad.exe",
             'video player':"C:\Program Files (x86)\Webteh\BSPlayer/bsplayer.exe",
         }),

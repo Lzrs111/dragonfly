@@ -53,6 +53,7 @@ cmd.map = {
            "dot":                              Text("."),
            "backspace": Key("backspace"),
            'slash': Key("slash"),
+           "dash": Key("minus"),
 
        
            "select all":                       release + Key("c-a"),

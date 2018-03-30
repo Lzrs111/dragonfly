@@ -18,14 +18,21 @@ class DragonflyRules(MappingRule):
         'Dragonfly key':Text('Key("")') + Key('left:2'),
         'dragonfly text': Text('Text("")')+Key('left:2'),
         'dragonfly pause':Text('Pause("")')+Key('left:2'),
-        'make a new snippet':Text("makenewsnippet")+Pause("20")+Key("tab"),
+        'make [a new] snippet':Text("makenewsnippet")+Pause("20")+Key("tab"),
         'dragonfly mimic':Text("Mimic("")")+Pause("20")+Key("left:2"),
         ' dragonfly playback':Text("Playback()")+Key("left"),
-        'open new file':Function(filer)
+        'open new file':Function(filer),
+        'dragonfly <key>':Text("Key('%(key)s')"),
+        'Troy':Text("\t"),
+        'dragonfly peter':Text("+pause+Key('tab')"),
     }
     extras = [
         Dictation('text'),
-        Integer('n', 0, 2000)
+        Integer('n', 0, 2000),
+        Choice('key',{
+            'enter':'enter',
+            'tab':'tab',
+        })
     ]    
     defaults = {
         'n':1
