@@ -53,6 +53,15 @@ class JavaScriptMain(MappingRule):
         'make logical or':Text("makeor")+Pause("20")+Key('tab'),
         'make logical and':Text("makeand")+Pause("20")+Key('tab'),
         'make webpack config':Text("webpackpreset")+Pause("20")+Key('tab'),
+        'await':Text("await "),
+        'asynchronous|a sink|i think':Text("async "),
+        'promise':Text("Promise"),
+        'then':Text("then"),
+        'throw error':Text("therr")+pause+Key('tab'),
+        'catch':Text("catch"),
+        'Jason':Text("JSON"),
+        'parse':Text("parse"),
+        'stringify':Text("stringify"),
         
         #array and string methods
         "[<text>] <method>": Text("%(text)s") + Pause("20") + Text("%(method)s")+ Pause("20") + Text("()") + Pause("20") + Key("left")+ Pause("20"),

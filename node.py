@@ -16,7 +16,6 @@ class NodeRules(MappingRule):
         'get':Text("GET"),
         'big request':Text("Request"),
         'fetch':Text(".fetch()"),
-        'parse':Text(".parse()"),
         'html':Text("html"),
         'http':Text("http"),
         'require <module>':Text("var %(module)s  = require('%(module)s')"),

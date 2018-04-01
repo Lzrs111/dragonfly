@@ -22,7 +22,7 @@ terminalRule = SeriesMappingRule(
         'list directories':Text("ls")+Key("enter"),
         'enter':Key("enter"),
         'master':Text(" master "),
-        'open current project':Text("code C:/Users/Mario/Desktop/voting")+Key("enter"),
+        'open current project':Text("code C:/Users/Mario/Desktop/biscel")+Key("enter"),
         'open macros':Text("code C:/NatLink/NatLink/MacroSystem"),
         'node install [<module>]':Text("npm install %(module)s"),
         'rerun':Key("up")+Key('enter'),

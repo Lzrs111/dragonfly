@@ -135,14 +135,11 @@ rules = SeriesMappingRule(
             'twitch':' HTTP://www.twitch.tv',
             'dragonfly key reference':'https://pythonhosted.org/dragonfly/actions.html',
             ' South Park':'http://southpark.cc.com/',
-            'Japanese':'www.onejav.com',
             'Facebook':'www.Facebook.com',
             'github':'www.github.com',
             'express':'https://expressjs.com/',
             'heroku':'www.heroku.com',
             'billing':'https://dashboard.heroku.com/account/billing',
-            'porn':'www.pornleech.is',
-            'Xvideos':'www.Xvideos.com',
             'mongo lab':'https://mlab.com/',
           })
 
